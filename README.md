@@ -109,7 +109,7 @@ const location = useLocation();
     }
   }}
   location={location}
-  gtmTags={['GTM-XXX']]}
+  gtmTags={['GTM-XXX']}
   initialDataLayer={{
     language,
     isAuthenticated,
@@ -206,7 +206,7 @@ useDataLayer({
 On Gatsby websites, you can integrate `react-gtm` by first placing the `<GTMProvider />` component in the `gatsby-browser.js` `wrapPageElement` method :
 
 ```es6
-import { GTMProvider } from '@tymate/react-use';
+import { GTMProvider } from '@tymate/react-gtm';
 
 export const wrapPageElement = ({
   element,
@@ -217,7 +217,7 @@ export const wrapPageElement = ({
       <GTMProvider
         data={data}
         location={location}
-        gtmTags={['GTM-XXX']]}
+        gtmTags={['GTM-XXX']}
       >
         {element}
       </GTMProvider>
