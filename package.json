@@ -1,6 +1,6 @@
 {
   "name": "@tymate/react-gtm",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Google Tag Manager integration for React",
   "main": "dist/index.js",
   "repository": "github.com/tymate/react-gtm",
