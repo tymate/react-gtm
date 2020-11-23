@@ -90,6 +90,8 @@ It takes the following properties :
 
 - `initialDataLayer` is an object of variables which will always be merged to the `virtual-pageview` events.
 
+- `isInitialDataLayerReady`, defaults to `true`, if passed `false`, prevents the sending of pageView events before becoming `true`.
+
 - `hasDebugEnabled` is a boolean enabling the logging of all the dataLayer pushes the library makes.
 
 ```es6

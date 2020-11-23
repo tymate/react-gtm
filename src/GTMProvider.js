@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { useDeepCompareEffect } from 'react-use';
+import { useDeepCompareEffect, usePrevious } from 'react-use';
 import { Helmet } from 'react-helmet';
 import { GTMContext } from './contexts';
 
@@ -19,10 +19,12 @@ const GTMProvider = ({
   location,
   gtmTags = [],
   initialDataLayer = {},
+  isInitialDataLayerReady = true,
   hasDebugEnabled = false,
 }) => {
   const pageRef = useRef();
   const dataLayer = useRef(initializeDataLayer());
+  const previousIsDataLayerReady = usePrevious(isInitialDataLayerReady);
 
   useEffect(() => {
     if (hasDebugEnabled) {
@@ -55,11 +57,26 @@ const GTMProvider = ({
   };
 
   useDeepCompareEffect(() => {
+    if (!isInitialDataLayerReady) {
+      return;
+    }
+
     handlePush({
       event: 'virtual-pageview',
       ...getCurrentDataLayer(),
     });
   }, [location]);
+
+  useEffect(() => {
+    if (!isInitialDataLayerReady || previousIsDataLayerReady) {
+      return;
+    }
+
+    handlePush({
+      event: 'virtual-pageview',
+      ...getCurrentDataLayer(),
+    });
+  }, [isInitialDataLayerReady]);
 
   useDeepCompareEffect(() => {
     handlePush(getCurrentDataLayer());
